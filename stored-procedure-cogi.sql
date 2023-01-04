@@ -1,6 +1,6 @@
 USE [S4]
 GO
-/****** Object:  StoredProcedure [dbo].[spHTCPPCogiReport]    Script Date: 1/4/2023 1:08:01 PM ******/
+/****** Object:  StoredProcedure [dbo].[spHTCPPCogiReport]    Script Date: 1/4/2023 1:24:45 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8,7 +8,7 @@ GO
 
 
 -- =============================================
--- Author:		<Author,,Thanat Dampawanwong>
+-- Author:		<Author,Thanat Dampawanwong>
 -- Create date: <Create Date,20211019 1030AM>
 -- Description:	<Description,Cogi with stock comparison>
 -- =============================================
@@ -106,6 +106,7 @@ BEGIN
 	AND [AFFW].[MATERIAL] = [MARD].[MATERIAL] 
 	WHERE [AFFW].[MESSAGE_NO] = '021' 
 	AND CONVERT(VARCHAR, [AFFW].[TIME_STAMP], 112) = @PDate 
+	AND CONVERT(VARCHAR, [AFFW].[POSTING_DATE], 112) < @PDate 
 	-- AND CONVERT(VARCHAR, [AFFW].[TIME_STAMP], 112) = @PDate #Change to posting date less than current 
 	ORDER BY [AFFW].[PLANT], 
 		[AFFW].[ORDER_NO], 
